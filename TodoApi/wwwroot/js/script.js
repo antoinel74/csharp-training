@@ -10,10 +10,12 @@ function getItems() {
 
 function addItem() {
   const addNameTextbox = document.getElementById("add-name");
+  const addDeadline = document.getElementById("add-deadline");
 
   const item = {
     isComplete: false,
     name: addNameTextbox.value.trim(),
+    deadline: addDeadline.value,
   };
 
   fetch(uri, {
@@ -45,6 +47,7 @@ function displayEditForm(id) {
 
   document.getElementById("edit-name").value = item.name;
   document.getElementById("edit-id").value = item.id;
+  document.getElementById("edit-deadline").value = item.deadline;
   document.getElementById("edit-isComplete").checked = item.isComplete;
   document.getElementById("editForm").style.display = "block";
 }
@@ -54,6 +57,7 @@ function updateItem() {
   const item = {
     id: parseInt(itemId, 10),
     isComplete: document.getElementById("edit-isComplete").checked,
+    deadline: document.getElementById("edit-deadline").value,
     name: document.getElementById("edit-name").value.trim(),
   };
 
@@ -115,10 +119,14 @@ function _displayItems(data) {
     td2.appendChild(textNode);
 
     let td3 = tr.insertCell(2);
-    td3.appendChild(editButton);
+    let dateNode = document.createTextNode(item.deadline ? new Date(item.deadline).toLocaleDateString() : "");
+    td3.appendChild(dateNode);
 
     let td4 = tr.insertCell(3);
-    td4.appendChild(deleteButton);
+    td4.appendChild(editButton);
+
+    let td5 = tr.insertCell(4);
+    td5.appendChild(deleteButton);
   });
 
   todos = data;

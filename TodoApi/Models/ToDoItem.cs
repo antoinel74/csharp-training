@@ -6,6 +6,7 @@ namespace TodoApi.Models
         public string? Name {get; set;}
         public bool isComplete {get; set;}
         public string? Secret {get; set;}
+        public DateTime Deadline { get; set; }
     }
 
     public class ToDoItemDTO
@@ -13,6 +14,7 @@ namespace TodoApi.Models
         public long Id { get; set; }
         public string? Name { get; set; }
         public bool isComplete { get; set; }
+        public DateTime Deadline { get; set; }
     }
 
 }
